@@ -1,0 +1,6 @@
+{
+  "name": "Untuk Nia",
+  "description": "Website romantis bernuansa pink dan biru untuk mengungkapkan perasaan cinta kepada Nia dengan animasi interaktif, galeri foto, surat cinta, dan konfeti.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
