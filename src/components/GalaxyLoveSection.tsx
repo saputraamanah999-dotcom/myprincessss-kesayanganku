@@ -106,7 +106,7 @@ export const GalaxyLoveSection: React.FC = () => {
         {/* Author attribution — original code by Miko */}
         <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 pointer-events-none">
           <span className="text-[10px] sm:text-[11px] text-slate-400 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10 font-mono">
-            Create by Miko
+            Create by Saputra
           </span>
         </div>
       </div>
