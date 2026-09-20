@@ -90,16 +90,35 @@ function initGalaxy(
   /* ------------------------------ CONTROLS -------------------------------- */
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
   controls.enabled = false;
   controls.target.set(0, 0, 0);
   controls.enablePan = false;
+  controls.enableRotate = true;
+  controls.enableZoom = true;
   controls.minDistance = 15;
   controls.maxDistance = 300;
-  controls.zoomSpeed = 0.3;
-  controls.rotateSpeed = 0.3;
+  controls.zoomSpeed = 0.8;
+  controls.rotateSpeed = 0.8;
+  // Explicit touch + mouse config (three.js 0.186 — required for reliable mobile drag)
+  controls.touches = {
+    ONE: THREE.TOUCH.ROTATE,
+    TWO: THREE.TOUCH.DOLLY_PAN,
+  };
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.ROTATE,
+    MIDDLE: THREE.MOUSE.DOLLY,
+    RIGHT: THREE.MOUSE.PAN,
+  };
   controls.update();
+
+  /* Pause autoRotate when user starts dragging, so manual drag feels responsive.
+     Don't re-enable on 'end' — user keeps control. Reset button re-enables it. */
+  controls.addEventListener("start", () => {
+    controls.autoRotate = false;
+  });
 
   /* ----------------------- GLOW MATERIAL FACTORY ------------------------- */
   function createGlowMaterial(color: string, size = 128, opacity = 0.55) {
@@ -1521,6 +1540,8 @@ function initGalaxy(
       camera.lookAt(0, 0, 0);
       controls.target.set(0, 0, 0);
       controls.enabled = false;
+      // Re-enable autoRotate for the next intro cycle
+      controls.autoRotate = true;
       controls.update();
       introStarted = false;
       fadeInProgress = false;
